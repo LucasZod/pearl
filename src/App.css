@@ -1,0 +1,11 @@
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  --primary-color-background: #1d3246;
+  --primary-color-blue: #14bfdb;
+  --primary-color-orange: #ff8858;
+  --primary-color-light: #eef7fa;
+}
+* {
+  box-sizing: border-box;
+}
