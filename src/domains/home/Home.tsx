@@ -87,7 +87,7 @@ const Menu = () => {
 }
 Menu.Layout = styled.div<{ changeStyleMenu: boolean }>(
   ({ changeStyleMenu }) => `
-  height: ${changeStyleMenu ? '65px' : '130px'};
+  height: ${changeStyleMenu ? '65px' : '100px'};
   background-image: linear-gradient(101deg, #015177, #0e2025);
   align-items: center;
   display: flex;
@@ -95,8 +95,8 @@ Menu.Layout = styled.div<{ changeStyleMenu: boolean }>(
   position: sticky;
   top: 0px;
   border-bottom: 2px solid #129fb4;
-  gap: 18px;
-  z-index: 1;
+  gap: 10px;
+  z-index: 999;
   transition: all 0.5s ease-in-out;
   opacity: ${changeStyleMenu ? '0.90' : '1'};
   ${changeStyleMenu && '& > button > span {font-size: 14px}}'}
@@ -129,14 +129,17 @@ Item.Text = styled(Text)`
   color: #ffffff;
   cursor: pointer;
   opacity: 0.7;
-  font-size: 1.2em;
+  font-size: 18px;
   transition: all 0.2s ease-in-out;
   &:hover {
     opacity: 1;
   }
 `
 Menu.TextButton = styled(Text)`
-  font-size: 18px;
+  font-size: 16px;
+  @media (max-width: 768px) {
+    font-size: 13px;
+  }
 `
 
 const LandingIntro = () => {
@@ -162,19 +165,16 @@ const LandingIntro = () => {
 
   return (
     <Layout>
+      <Show condition={!isMobile}>
+        <FillFlexPlace fill={0.2} />
+      </Show>
       <InfoContent>
-        <Show condition={!isMobile}>
-          <FillFlexPlace fill={0.8} />
-        </Show>
         <ContainerInfo>
           <Show condition={!isMobile}>
             <FillFlexPlace />
           </Show>
           <ContainerTexts>
-            <Title>
-              THE FUTURE OF
-              <br /> DENTISTRY
-            </Title>
+            <Title>THE FUTURE OF DENTISTRY</Title>
             <SubTitle>POWERED BY AI</SubTitle>
             <Button primary>
               <TextButton>Request a Demo</TextButton>
@@ -190,7 +190,7 @@ const LandingIntro = () => {
         </ContainerInfo>
       </InfoContent>
       <ImageContent>
-        <Video autoPlay loop muted>
+        <Video autoPlay loop muted playsInline>
           <source src={VIDEO_INTRO_MP4} type="video/mp4" />
           <source src={VIDEO_INTRO_OGG} type="video/ogg" />
           <source src={VIDEO_INTRO_WEBM} type="video/webm" />
@@ -201,7 +201,7 @@ const LandingIntro = () => {
 }
 LandingIntro.Layout = styled.div`
   background-image: linear-gradient(101deg, #0c3256, #2e5f6c);
-  height: calc(100vh - 130px);
+  height: calc(100vh - 100px);
   padding: 10px 20px;
   display: flex;
   align-items: center;
@@ -213,7 +213,7 @@ LandingIntro.Layout = styled.div`
   }
 `
 LandingIntro.InfoContent = styled.div`
-  flex: 1.3;
+  flex: 1;
   display: flex;
   gap: 10px;
   height: 100%;
@@ -232,13 +232,18 @@ LandingIntro.ContainerTexts = styled.div`
     align-items: center;
   }
 `
-LandingIntro.Title = styled(Title)`
+LandingIntro.Title = styled(Text)`
   font-weight: 700;
   color: #ffffff;
-  font-size: 70px;
-  @media (max-width: 1120px) {
-    font-size: 2em;
+  font-size: 60px !important;
+  font-family: Aspira;
+  @media (min-width: 450px) and (max-width: 1120px) {
     text-align: center;
+    font-size: 50px !important;
+  }
+  @media (max-width: 450px) {
+    text-align: center;
+    font-size: 40px !important;
   }
 `
 LandingIntro.SubTitle = styled(SubTitle)`
@@ -300,20 +305,19 @@ LandingIntro.Logo = styled.img`
 `
 
 const DentalSolutionPage = () => {
-  const { Layout, Container, ContainerText, Title, Text, Image } = DentalSolutionPage
+  const { Layout, Container, ContainerText, Title, Divider, Text, Image } = DentalSolutionPage
 
   return (
     <Layout>
       <Container>
         <ContainerText>
-          <Title>
-            Dental AI Solutions that put <br /> dentist and patients at ease.
-          </Title>
+          <Title>Dental AI Solutions that put dentist and patients at ease.</Title>
+          <Divider />
           <Text>
-            Our products were built with the dental professional in mind and the patient at <br />
-            heart. Using the latest innovations in artificial intelligence and over 10 years of <br />
-            expertise in computer vision, Pearl aims to usher in a new wave of dental AI solutions <br />
-            to brighten the future of oral healthcare worldwide.
+            Our products were built with the dental professional in mind and the patient at heart. Using the
+            latest innovations in artificial intelligence and over 10 years of expertise in computer vision,
+            Pearl aims to usher in a new wave of dental AI solutions to brighten the future of oral healthcare
+            worldwide.
           </Text>
         </ContainerText>
         <Image src={dentalSolutionImage} />
@@ -325,14 +329,14 @@ DentalSolutionPage.Layout = styled.div`
   background: #ffffff;
   padding: 40px 0;
   display: flex;
-  gap: 15px;
 `
 DentalSolutionPage.Container = styled.div`
   margin: 0 auto;
   max-width: 1200px;
   display: flex;
+  gap: 40px;
   @media (max-width: 1120px) {
-    flex-direction: column;
+    flex-direction: column-reverse;
     align-items: center;
   }
 `
@@ -340,21 +344,37 @@ DentalSolutionPage.ContainerText = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 10px;
+  align-items: center;
+  gap: 15px;
   padding: 0 20px;
 `
 DentalSolutionPage.Title = styled(Title)`
-  font-size: 30px;
   font-weight: bold;
   line-height: 1.2;
+  @media (max-width: 768px) {
+    text-align: center;
+  }
+`
+DentalSolutionPage.Divider = styled.div`
+  width: 80px;
+  height: 5px;
+  background: var(--primary-color-blue);
+  border-radius: 10px;
+  background: #6a8fd7;
 `
 DentalSolutionPage.Text = styled(Text)`
   font-weight: 500;
   font-size: 15px;
+  @media (max-width: 768px) {
+    text-align: center;
+  }
 `
-
 DentalSolutionPage.Image = styled.img`
   max-width: 100%;
+  @media (max-width: 1120px) {
+    max-width: 400px;
+    width: 100%;
+  }
 `
 
 const MakeUniquePage = () => {
@@ -376,7 +396,7 @@ const MakeUniquePage = () => {
 }
 MakeUniquePage.Layout = styled.div`
   background: linear-gradient(43.17deg, #182f45 0%, rgb(20, 191, 219) 96%);
-  padding: 40px 0;
+  padding: 20px 0;
   position: relative;
   height: 400px;
 `
@@ -387,27 +407,26 @@ MakeUniquePage.Container = styled.div`
   flex-direction: column;
   gap: 20px;
   align-items: center;
+  padding: 10px;
 `
-MakeUniquePage.Title = styled(Title)`
-  font-size: 27px;
+MakeUniquePage.Title = styled(SubTitle)`
   color: var(--primary-color-light);
   text-align: center;
   font-weight: bold;
 `
 MakeUniquePage.Divider = styled.div`
-  width: 70px;
-  height: 4px;
+  width: 80px;
+  height: 5px;
   background-color: var(--primary-color-light);
   border-radius: 10px;
 `
-MakeUniquePage.SubTitle = styled(SubTitle)`
-  font-size: 17px;
+MakeUniquePage.SubTitle = styled(Text)`
+  font-size: 19px !important;
   color: var(--primary-color-light);
   text-align: center;
 `
 const ContainerImagesMakeUniquePages = () => {
   const { Layout } = ContainerImagesMakeUniquePages
-
   return (
     <Layout>
       <CardMakeUniquePage
@@ -428,7 +447,7 @@ ContainerImagesMakeUniquePages.Layout = styled.div`
   align-items: center;
   position: absolute;
   left: 50%;
-  top: 50%;
+  top: 54%;
   transform: translateX(-50%);
   gap: 30px;
   @media (max-width: 1120px) {
@@ -454,7 +473,6 @@ CardMakeUniquePage.Layout = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: transparent;
 `
 CardMakeUniquePage.Card = styled.div`
   background: #ffffff;
@@ -462,18 +480,19 @@ CardMakeUniquePage.Card = styled.div`
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.7);
   display: flex;
   flex-direction: column;
-  gap: 30px;
   padding: 15px;
   max-width: 430px;
   height: 330px;
   align-items: center;
+  justify-content: space-evenly;
   @media (max-width: 1120px) {
     height: 100%;
     padding: 30px;
+    gap: 15px;
   }
 `
 CardMakeUniquePage.MarginDetail = styled.div<{ title: string }>`
-  width: 300px;
+  width: 280px;
   height: 7px;
   border-radius: 0 0 8px 8px;
   ${(props) => props.title === 'Practice Intelligence' && ' background: #094074;'}
@@ -489,13 +508,15 @@ CardMakeUniquePage.ContainerText = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 10px;
 `
 CardMakeUniquePage.Title = styled(Title)`
-  font-size: 20px;
+  font-size: 20px !important;
   font-weight: bold;
 `
 CardMakeUniquePage.Text = styled(Text)`
   font-size: 15px;
+  text-align: center;
 `
 
 const PracticesDso = () => {
@@ -525,10 +546,10 @@ PracticesDso.Layout = styled.div`
     padding-top: 500px;
   }
   @media (min-width: 800px) and (max-width: 1120px) {
-    padding-top: 600px;
+    padding-top: 550px;
   }
   @media (max-width: 600px) {
-    padding-top: 460px;
+    padding-top: 500px;
   }
 `
 PracticesDso.Container = styled.div`
@@ -536,16 +557,16 @@ PracticesDso.Container = styled.div`
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 20px;
 `
 PracticesDso.ContainerIntro = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 8px;
   align-items: center;
+  padding: 0px 15px;
 `
 PracticesDso.Title = styled(Title)`
-  font-size: 30px;
+  font-size: 40px !important;
   font-weight: bold;
   text-align: center;
 `
@@ -556,7 +577,7 @@ PracticesDso.Divider = styled.div`
   border-radius: 10px;
 `
 PracticesDso.SubTitle = styled(Text)`
-  font-size: 18px;
+  font-size: 18px !important;
   text-align: center;
 `
 const ContainerSecondOpinion = () => {
@@ -568,13 +589,13 @@ const ContainerSecondOpinion = () => {
         <Title>Second Opinion®</Title>
         <Divider />
         <Text>
-          Quality patient care in dentistry starts with accurate interpretation of x-rays. <br /> Thats why we
-          developed Second Opinion—a computer vision platform that
-          <br /> can instantly detects numerous potential conditions in dental radiographs. <br /> <br />{' '}
-          Trained on x-rays annotated by a team of world renowned dentists and
-          <br /> radiologists, our radiologic solution ensures that your dental care has the
-          <br /> strongest foundation possible. Patient health and trust rise from that
-          <br /> foundation-making Second Opinion the only other opinion youll ever need. <br /> <br />
+          Quality patient care in dentistry starts with accurate interpretation of x-rays. Thats why we
+          developed Second Opinion-a computer vision platform that can instantly detects numerous potential
+          conditions in dental radiographs. <br /> <br />
+          Trained on x-rays annotated by a team of world renowned dentists and radiologists, our radiologic
+          solution ensures that your dental care has the strongest foundation possible. Patient health and
+          trust rise from that foundation-making Second Opinion the only other opinion youll ever need.
+          <br />
           <strong>*Not available in certain countries.</strong>
         </Text>
         <Button primary>Learn more</Button>
@@ -599,16 +620,17 @@ ContainerSecondOpinion.Layout = styled.div`
 ContainerSecondOpinion.ContainerInfo = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 10px;
   padding: 20px;
+  flex: 1;
 `
 ContainerSecondOpinion.Title = styled(Title)`
-  font-size: 30px;
+  font-size: 28px !important;
   font-weight: bold;
 `
 ContainerSecondOpinion.Divider = styled.div`
   width: 50px;
-  height: 4px;
+  height: 5px;
   background-color: #6a8fd7;
   border-radius: 10px;
 `
@@ -622,9 +644,11 @@ ContainerSecondOpinion.Text = styled(Text)`
   }
 `
 ContainerSecondOpinion.Button = styled(Button)`
-  width: 200px;
+  width: 150px;
 `
-ContainerSecondOpinion.ContainerImage = styled.div``
+ContainerSecondOpinion.ContainerImage = styled.div`
+  flex: 1;
+`
 ContainerSecondOpinion.Image = styled.img`
   max-width: 600px;
   width: 100%;
@@ -641,14 +665,13 @@ const ContainerPracticeIntelligence = () => {
         <Title>Practice Intelligence®</Title>
         <Divider />
         <Text>
-          Collecting evidence in patient radiographs detected by Second Opinion and <br />
-          treatment data from a practice management system, Practice Intelligence gives
-          <br /> office staff x-ray vision into practice performance.
+          Collecting evidence in patient radiographs detected by Second Opinion and treatment data from a
+          practice management system, Practice Intelligence gives office staff x-ray vision into practice
+          performance.
           <br />
           <br />
-          Dentists, office managers, and clinical staff apply its findings to inform training,
-          <br /> staffing, and procurement decisions, enabling practices to ensure consistent
-          <br /> and optimal performance.
+          Dentists, office managers, and clinical staff apply its findings to inform training, staffing, and
+          procurement decisions, enabling practices to ensure consistent and optimal performance.
         </Text>
         <Button primary>Learn more</Button>
       </ContainerInfo>
@@ -669,16 +692,17 @@ ContainerPracticeIntelligence.Layout = styled.div`
 ContainerPracticeIntelligence.ContainerInfo = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 10px;
   padding: 20px;
+  flex: 1;
 `
 ContainerPracticeIntelligence.Title = styled(Title)`
-  font-size: 30px;
+  font-size: 28px !important;
   font-weight: bold;
 `
 ContainerPracticeIntelligence.Divider = styled.div`
   width: 50px;
-  height: 4px;
+  height: 5px;
   background-color: #6a8fd7;
   border-radius: 10px;
 `
@@ -692,7 +716,7 @@ ContainerPracticeIntelligence.Text = styled(Text)`
   }
 `
 ContainerPracticeIntelligence.Button = styled(Button)`
-  width: 200px;
+  width: 150px;
 `
 ContainerPracticeIntelligence.ContainerImage = styled.div``
 ContainerPracticeIntelligence.Image = styled.img`
@@ -727,7 +751,6 @@ OurTechnologyPage.Container = styled.div`
   align-items: center;
 `
 OurTechnologyPage.Title = styled(Title)`
-  font-size: 50px;
   font-weight: bold;
   color: #ffffff;
   text-align: center;
@@ -742,7 +765,7 @@ OurTechnologyPage.Divider = styled.div`
 OurTechnologyPage.SubTitle = styled(SubTitle)`
   color: #ffffff;
   text-align: center;
-  font-size: 22px;
+  font-size: 30px !important;
   margin-top: 30px;
 `
 const GeneralInfoPage = () => {
@@ -840,11 +863,11 @@ CardInfo.ContainerText = styled.div`
   flex-direction: column;
 `
 CardInfo.Title = styled(Title)`
-  font-size: 26px;
+  font-size: 30px !important;
   font-weight: bold;
 `
 CardInfo.Text = styled(Text)`
-  font-size: 15px;
+  font-size: 15px !important;
   line-height: 1.3;
 `
 const FolderGeneralInfo = () => {
@@ -863,18 +886,18 @@ const FolderGeneralInfo = () => {
   )
 }
 FolderGeneralInfo.Layout = styled.div`
-  padding: 20px;
+  padding: 40px 20px;
   background-image: linear-gradient(150deg, #051728, #072037a2);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 320px;
+  /* height: 320px; */
   width: 100%;
   border-radius: 30px;
   margin-top: 40px;
   @media (max-width: 768px) {
-    height: 280px;
+    /* height: 280px; */
   }
 `
 FolderGeneralInfo.Container = styled.div`
@@ -886,22 +909,24 @@ FolderGeneralInfo.Container = styled.div`
 FolderGeneralInfo.ContainerTexts = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 20px;
 `
 FolderGeneralInfo.Title = styled(Title)`
   color: #ffffff;
-  font-size: 27px;
+  font-size: 35px !important;
   font-weight: bold;
   text-align: center;
 `
-FolderGeneralInfo.SubTitle = styled(Title)`
+FolderGeneralInfo.SubTitle = styled(SubTitle)`
   color: var(--primary-color-blue);
-  font-size: 27px;
+  font-size: 25px !important;
   font-weight: bold;
   text-align: center;
 `
 FolderGeneralInfo.Button = styled(Button)`
-  width: 240px;
+  width: 200px;
   margin-top: 40px;
+  font-family: Aspira bold;
 `
 const WhatsMakeUsUnique = () => {
   const { Layout, Title, Divider, Text } = WhatsMakeUsUnique
@@ -919,27 +944,26 @@ const WhatsMakeUsUnique = () => {
 WhatsMakeUsUnique.Layout = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 15px;
   align-items: center;
   margin-top: 80px;
 `
 WhatsMakeUsUnique.Title = styled(Title)`
-  font-size: 30px;
+  font-size: 36px !important;
   color: #051728;
-  font-weight: bold;
   text-align: center;
-  margin: 15px;
 `
 WhatsMakeUsUnique.Divider = styled.div`
-  width: 100px;
-  height: 4px;
+  width: 80px;
+  height: 5px;
   background-color: #051728;
   border-radius: 10px;
 `
 WhatsMakeUsUnique.Text = styled(Text)`
-  font-size: 16px !important;
+  font-size: 18px !important;
   color: #051728;
   text-align: center;
+  margin-top: 10px;
 `
 const ImportantInfos = () => {
   const { Layout } = ImportantInfos
@@ -972,7 +996,7 @@ ImportantInfos.Layout = styled.div`
   justify-content: center;
   gap: 30px;
   flex-wrap: wrap;
-  margin-top: 70px;
+  margin-top: 50px;
 `
 const CardImportantInfo = ({ image, title, text }: { image: any; title: string; text: string }) => {
   const { Layout, ContainerImage, Image, ContainerTexts, Title, Text } = CardImportantInfo
@@ -1007,15 +1031,16 @@ CardImportantInfo.ContainerTexts = styled.div`
   gap: 15px;
 `
 CardImportantInfo.Title = styled(Text)`
-  font-size: 26px;
+  font-size: 28px !important;
   color: #051728;
-  font-weight: bold;
   text-align: center;
+  font-family: Aspira bold;
 `
 CardImportantInfo.Text = styled(Text)`
-  font-size: 15px;
+  font-size: 16px !important;
   color: #051728;
   text-align: center;
+  font-weight: 500;
 `
 const ContainerForm = () => {
   const {
@@ -1114,6 +1139,7 @@ ContainerForm.Layout = styled.div`
   position: relative;
   display: grid;
   place-items: center;
+  z-index: 0;
 `
 ContainerForm.Container = styled.div`
   max-width: 1200px;
@@ -1175,7 +1201,7 @@ ContainerForm.AgreeTerms = styled.div``
 ContainerForm.TextTerms = styled(Text)`
   font-size: 13px !important;
   color: #ffffff;
-  line-height: 2;
+  line-height: 1.6;
   a {
     font-size: 15px;
     color: #ffffff;

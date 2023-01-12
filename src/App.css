@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Aspira Light', sans-serif;
   --primary-color-background: #1d3246;
   --primary-color-blue: #14bfdb;
   --primary-color-orange: #ff8858;
@@ -8,4 +8,25 @@ body {
 }
 * {
   box-sizing: border-box;
+}
+
+@font-face {
+  font-family: Aspira;
+  src: url(./assets/fonts/Aspira-Black.otf);
+}
+@font-face {
+  font-family: Aspira Bold;
+  src: url(./assets/fonts/Aspira-Bold.otf);
+}
+@font-face {
+  font-family: Aspira Demi;
+  src: url(./assets/fonts/Aspira-Demi.otf);
+}
+@font-face {
+  font-family: Aspira Italic;
+  src: url(./assets/fonts/Aspira-Italic.otf);
+}
+@font-face {
+  font-family: Aspira Light;
+  src: url(./assets/fonts/Aspira-Light.otf);
 }
