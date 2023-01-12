@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
 
-interface IButton extends React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
+interface IButton
+  extends React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
   primary?: boolean
   secondary?: boolean
 }
@@ -9,7 +10,7 @@ export const Button = ({ primary, secondary, ...props }: IButton) => {
   return <ButtonLayout {...props} primary={primary} secondary={secondary} />
 }
 Button.ButtonLayout = styled.button<{ primary?: boolean; secondary?: boolean }>`
-  border-radius: 31px;
+  border-radius: 20px;
   transition: background 0.2s ease-in-out;
   padding: 12px 16px;
   border: none;

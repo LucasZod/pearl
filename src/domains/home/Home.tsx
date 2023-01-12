@@ -25,7 +25,7 @@ import {
   VIDEO_INTRO_OGG,
   VIDEO_INTRO_WEBM,
 } from './HomeConstants'
-import { Form, Formik, FormikProvider, useFormik } from 'formik'
+import { Form, FormikProvider, useFormik } from 'formik'
 import { InputField } from '../components/InputText'
 import { HomeStore, selectJustCountryName } from './HomeStore'
 
@@ -57,13 +57,14 @@ Home.Layout = styled.div`
 `
 const Menu = () => {
   const { Layout, ContainerLogo, Logo, TextButton } = Menu
-  const [changeStyleMenu, setChangeStyleMenu] = useState(false)
+  const dispatch = HomeStore.useDispatch()
+  const { changeStyleMenu } = HomeStore.useState()
 
   useEffect(() => {
     document.addEventListener('scroll', getScrollEvent)
     function getScrollEvent() {
       const scrollY = window.scrollY
-      setChangeStyleMenu(scrollY > 6)
+      dispatch(HomeStore.actions.setChangeStyleMenu(scrollY > 6))
     }
     return () => {
       document.removeEventListener('scroll', getScrollEvent)
@@ -116,6 +117,7 @@ Menu.Logo = styled.img`
   margin-bottom: 20px;
   @media (max-width: 768px) {
     width: 100%;
+    margin-bottom: 0;
   }
 `
 const Item = ({ name }: { name: string }) => {
@@ -188,7 +190,7 @@ const LandingIntro = () => {
         </ContainerInfo>
       </InfoContent>
       <ImageContent>
-        <Video autoPlay loop>
+        <Video autoPlay loop muted>
           <source src={VIDEO_INTRO_MP4} type="video/mp4" />
           <source src={VIDEO_INTRO_OGG} type="video/ogg" />
           <source src={VIDEO_INTRO_WEBM} type="video/webm" />
