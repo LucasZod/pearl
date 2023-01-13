@@ -15,9 +15,18 @@ export const IMAGE_PC_PRACTICE_INTELLIGENCE =
 
 export const GAN_BASE_ICON =
   'https://assets-global.website-files.com/5ffcdef9e3ab6179368a7a05/6201cd2ea236f4744b750d5a_GAN.svg'
+
 export const SEGMENTATION_ICON =
   'https://assets-global.website-files.com/5ffcdef9e3ab6179368a7a05/6201cd2e0d2775af2e21f6a6_Segmentation.svg'
+
 export const DETECTION_ICON =
   'https://assets-global.website-files.com/5ffcdef9e3ab6179368a7a05/6201cd2dc37a820aca735f0c_Detection.svg'
+
 export const MENSURATION_ICON =
   'https://assets-global.website-files.com/5ffcdef9e3ab6179368a7a05/6201cd2e096d7efd8a9c002d_Mesurment.svg'
+
+export const IMAGE_FDA1 =
+  'https://assets-global.website-files.com/5ffcdef9e3ab6179368a7a05/62f56746512f1547369a4f43_FDA%20Icon.svg'
+
+export const IMAGE_FDA2 =
+  'https://assets-global.website-files.com/5ffcdef9e3ab6179368a7a05/62f5674685742f7940a82c66_countries%402x.png'

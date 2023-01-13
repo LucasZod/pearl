@@ -5,6 +5,7 @@ import { Show } from '../components/Show'
 import { SubTitle, Text, Title } from '../components/Typograph'
 import { useWindowSize } from '../components/UseWindowSize'
 import logoBrandSmart from '../../assets/images/brand-smart-orange.png'
+import logoBrandSmartBlue from '../../assets/images/smart-brand-blue.png'
 import secondOpinionLogo from '../../assets/images/second-opinion-logo.png'
 import praticeIntelligenceLogo from '../../assets/images/pratice-intelligence-logo.png'
 import dentalSolutionImage from '../../assets/images/dental-solution.png'
@@ -14,9 +15,14 @@ import pcGeneralInfoImage from '../../assets/images/image-pc-general-info.png'
 import leadingCapabilitiesImage from '../../assets/images/leading-capabilities-image.png'
 import superiorDataImage from '../../assets/images/superior-data-image.png'
 import proveExperienceImage from '../../assets/images/proven-experience-image.png'
+import pearlLogoBlack from '../../assets/images/peral-logo-high.png'
+import secondOpinionHigh from '../../assets/images/second-opinion-high-logo.png'
+import practiceIntelligenceHigh from '../../assets/images/pratice-intelligence-high-logo.png'
 import {
   DETECTION_ICON,
   GAN_BASE_ICON,
+  IMAGE_FDA1,
+  IMAGE_FDA2,
   IMAGE_PC_PRACTICE_INTELLIGENCE,
   IMAGE_PC_SECOND_OPINION,
   MENSURATION_ICON,
@@ -26,7 +32,7 @@ import {
   VIDEO_INTRO_WEBM,
 } from './HomeConstants'
 import { Form, FormikProvider, useFormik } from 'formik'
-import { InputField } from '../components/InputText'
+import { InputField, TextFieldInput } from '../components/InputText'
 import { HomeStore, selectJustCountryName } from './HomeStore'
 
 export const Home = () => {
@@ -46,6 +52,8 @@ export const Home = () => {
         <OurTechnologyPage />
         <GeneralInfoPage />
         <ContainerForm />
+        <GlobalDentalLeaderPage />
+        <Footer />
       </Layout>
     </HomeStore.Provider>
   )
@@ -1160,13 +1168,13 @@ ContainerForm.ContainerTexts = styled.div`
 ContainerForm.Title = styled(Title)`
   color: #ffffff;
   font-weight: bold;
-  font-size: 30px;
+  font-size: 35px !important;
   text-align: center;
 `
 ContainerForm.SubTitle = styled(Text)`
   color: #ffffff;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 18px !important;
   text-align: center;
 `
 ContainerForm.ContainerInputs = styled.div`
@@ -1178,7 +1186,7 @@ ContainerForm.ContainerInputs = styled.div`
   & > div:nth-of-type(-n + 2) {
     flex: 1 1 500px;
   }
-  & > div:nth-of-type(n + 3):nth-child(-n + 5) {
+  & > div:nth-of-type(n + 3):nth-of-type(-n + 5) {
     flex: 1 1 350px;
   }
   & > div:nth-of-type(n + 6) {
@@ -1215,6 +1223,311 @@ ContainerForm.TextButton = styled(Text)`
   font-size: 18px;
   font-weight: bold;
 `
+const GlobalDentalLeaderPage = () => {
+  const { Layout, Container, ContainerTexts, Title, Divider, Text, ContainerCards } = GlobalDentalLeaderPage
+
+  return (
+    <Layout>
+      <Container>
+        <ContainerTexts>
+          <Title>Whats makes us the global dental AI leader</Title>
+          <Divider />
+          <Text>
+            Our AI authorized to assist dentists across six continents with the most robust clinical pathology
+            detection capabilities dentistry.
+          </Text>
+        </ContainerTexts>
+        <ContainerCards>
+          <CardDentalLeader
+            image={IMAGE_FDA1}
+            title="More clinical detection capabilities..."
+            text="We are the only dental AI company with FDA clearance for patient-facing detection of numerous common dental conditions affecting permanent teeth in bitewing and periapical x-rays of patients 12 and older."
+          />
+          <CardDentalLeader
+            image={IMAGE_FDA2}
+            title="...for more practices around the world."
+            text="With medical regulatory clearances for clinical pathology detection in over 100 countries, we are the only dental AI company elevating patient care for practices across the globe."
+          />
+        </ContainerCards>
+      </Container>
+    </Layout>
+  )
+}
+GlobalDentalLeaderPage.Layout = styled.div`
+  padding: 40px 10px;
+  background: var(--primary-color-light);
+`
+GlobalDentalLeaderPage.Container = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+`
+GlobalDentalLeaderPage.ContainerTexts = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+`
+GlobalDentalLeaderPage.Title = styled(Title)`
+  font-size: 35px !important;
+  text-align: center;
+`
+GlobalDentalLeaderPage.Divider = styled.div`
+  height: 5px;
+  width: 90px;
+  background: #6a8fd7;
+  border-radius: 10px;
+`
+GlobalDentalLeaderPage.Text = styled(Text)`
+  font-size: 18px !important;
+  text-align: center;
+`
+GlobalDentalLeaderPage.ContainerCards = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 40px;
+`
+const CardDentalLeader = ({ image, title, text }: { image: any; title: string; text: string }) => {
+  const { Layout, ContainerImage, Image, ContainerTexts, Title, Text } = CardDentalLeader
+  return (
+    <Layout>
+      <ContainerImage>
+        <Image src={image} />
+      </ContainerImage>
+      <ContainerTexts>
+        <Title>{title}</Title>
+        <Text>{text}</Text>
+      </ContainerTexts>
+    </Layout>
+  )
+}
+CardDentalLeader.Layout = styled.div`
+  flex: 1 1 400px;
+  display: flex;
+  height: 400px;
+  flex-direction: column;
+  gap: 30px;
+  padding: 20px 15px;
+  align-items: center;
+  justify-content: space-evenly;
+  box-shadow: 0px 0px 10px 4px rgba(0, 0, 0, 0.2);
+  transition: border 0.5s ease-in-out;
+  border-radius: 17px;
+  background: #ffffff;
+`
+CardDentalLeader.ContainerImage = styled.div``
+CardDentalLeader.Image = styled.img`
+  max-width: 200px;
+  width: 100%;
+`
+CardDentalLeader.ContainerTexts = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+`
+CardDentalLeader.Title = styled(Text)`
+  font-size: 25px !important;
+  color: #051728;
+  text-align: center;
+  font-family: Aspira bold;
+`
+CardDentalLeader.Text = styled(Text)`
+  font-size: 16px !important;
+  color: #051728;
+  text-align: center;
+  font-weight: 500;
+  line-height: 1.2;
+`
+const Footer = () => {
+  const { Layout, Container, Smart, ContainerLogo, Logo, Text, ContainerLogosServices, LogoService } = Footer
+  return (
+    <Layout>
+      <Container>
+        <Smart>
+          <ContainerLogo>
+            <Logo src={logoBrandSmartBlue} />
+          </ContainerLogo>
+          <Text>
+            With medical regulatory clearences for clinical pathology detection in over 100 countries, Pearl
+            is the only dental AI company elevating patient care for practices across the globe.
+          </Text>
+          <ContainerLogosServices>
+            <LogoService src={secondOpinionHigh} />
+            <LogoService src={practiceIntelligenceHigh} />
+            <LogoService src={pearlLogoBlack} />
+          </ContainerLogosServices>
+        </Smart>
+        <ContactUs />
+      </Container>
+    </Layout>
+  )
+}
+Footer.Layout = styled.div`
+  padding: 10px;
+  background: #ffffff;
+`
+Footer.Container = styled.div`
+  display: flex;
+  gap: 10px;
+  max-width: 1200px;
+  margin: 0 auto;
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+`
+Footer.Smart = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  flex: 1;
+`
+Footer.ContainerLogo = styled.div`
+  display: flex;
+  @media (max-width: 1120px) {
+    justify-content: center;
+  }
+`
+Footer.Logo = styled.img`
+  width: 300px;
+`
+Footer.Text = styled(Text)`
+  font-size: 17px !important;
+  color: #092459;
+  font-weight: 600;
+  line-height: 1.5;
+  @media (max-width: 1120px) {
+    text-align: center;
+  }
+`
+Footer.ContainerLogosServices = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+`
+Footer.LogoService = styled.img`
+  width: 280px;
+`
+const ContactUs = () => {
+  const {
+    Layout,
+    Container,
+    Company,
+    ContainerProducts,
+    TextProducts,
+    Title,
+    Contact,
+    ContainerInputs,
+    Button,
+    TextButton,
+    Input,
+  } = ContactUs
+  return (
+    <Layout>
+      <Container>
+        <Company>
+          <Title>Company</Title>
+          <ContainerProducts>
+            <TextProducts>Products</TextProducts>
+            <TextProducts>Second Opinion</TextProducts>
+            <TextProducts>Practice Intelligence</TextProducts>
+          </ContainerProducts>
+        </Company>
+        <Contact>
+          <Title>Contact Us</Title>
+          <ContainerInputs>
+            <Input placeholder="Enter your email" onChange={() => null} />
+            <Button primary>
+              <TextButton>Send email</TextButton>
+            </Button>
+          </ContainerInputs>
+        </Contact>
+      </Container>
+    </Layout>
+  )
+}
+ContactUs.Layout = styled.div`
+  background: #094074;
+  padding: 20px;
+  flex: 1;
+`
+ContactUs.Container = styled.div`
+  display: flex;
+  gap: 10px;
+  height: 100%;
+  align-items: center;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 40px;
+  }
+`
+ContactUs.Company = styled.div`
+  display: flex;
+  gap: 30px;
+  flex-direction: column;
+  flex: 0.6;
+  padding-left: 30px;
+  @media (max-width: 1120px) {
+    padding-left: 0;
+    gap: 15px;
+  }
+`
+ContactUs.Title = styled(Text)`
+  font-size: 18px !important;
+  font-weight: bold;
+  color: var(--primary-color-blue);
+  @media (max-width: 1120px) {
+    text-align: center;
+  }
+`
+ContactUs.ContainerProducts = styled.div`
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+`
+ContactUs.TextProducts = styled.div`
+  font-size: 16px !important;
+  font-weight: 600;
+  color: #ffffff;
+  @media (max-width: 1120px) {
+    text-align: center;
+  }
+`
+ContactUs.Contact = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  width: 100%;
+`
+ContactUs.ContainerInputs = styled.div`
+  display: flex;
+  flex-direction: column;
+  @media (max-width: 1120px) {
+    align-items: center;
+  }
+`
+ContactUs.Input = styled(TextFieldInput)`
+  color: #ffffff;
+  font-weight: bold;
+  @media (max-width: 1120px) {
+    max-width: 300px;
+    width: 100%;
+  }
+`
+ContactUs.TextButton = styled(Text)`
+  font-weight: bold;
+  font-size: 14px;
+`
+ContactUs.Button = styled(Button)`
+  width: 130px;
+  padding: 8px;
+`
+
 const FillFlexPlace = ({ fill = 1 }: { fill?: number }) => {
   return <div style={{ flex: fill }} />
 }
