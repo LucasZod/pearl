@@ -47,7 +47,10 @@ export const TextFieldInput = React.memo(function textFieldInput({
   }
   return (
     <Label hasError={!!errorMessage} style={style} className={className}>
-      {props.label}
+      <div style={{ display: 'flex', justifyContent: 'space-between', padding: '0 7px' }}>
+        {props.label}
+        <ErrorMessage error={errorMessage} />
+      </div>
       {props.type === 'select' ? (
         <select {...(props as any)}>{Children}</select>
       ) : Children ? (
@@ -60,9 +63,6 @@ export const TextFieldInput = React.memo(function textFieldInput({
           checked={props.type === 'checkbox' && props.value}
         />
       )}
-      {/* <div height={errorMessage ? 'auto' : 0}>
-        <div className='error-message'>{displayErrorMessage || errorMessage}</div>
-      </div> */}
     </Label>
   )
 })
@@ -100,6 +100,21 @@ const Label = styled.label<{ hasError: boolean }>(
   }
 `
 )
+
+const ErrorMessage = ({ error }: { error?: string }) => {
+  const { Layout, Text } = ErrorMessage
+  if (!error) return null
+  return (
+    <Layout>
+      <Text>{error}</Text>
+    </Layout>
+  )
+}
+ErrorMessage.Layout = styled.div``
+ErrorMessage.Text = styled.span`
+  color: red;
+  font-weight: 500;
+`
 
 export const InputField = React.memo(function textField(props: any) {
   const [field, meta] = useField(props.name)

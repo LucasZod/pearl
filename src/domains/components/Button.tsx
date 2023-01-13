@@ -15,6 +15,9 @@ Button.ButtonLayout = styled.button<{ primary?: boolean; secondary?: boolean }>`
   padding: 12px 16px;
   border: none;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-weight: 600;
   @media (max-width: 768px) {
     padding: 8px 10px;
@@ -42,7 +45,7 @@ Button.ButtonLayout = styled.button<{ primary?: boolean; secondary?: boolean }>`
       props.secondary &&
       `
     background: #BBE7EF;
-    border: none;
+    border: #BBE7EF;
     `}
   }
 `

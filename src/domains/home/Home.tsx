@@ -85,9 +85,13 @@ const Menu = () => {
         <Logo src={logoBrandSmart} alt="logo" />
       </ContainerLogo>
       <FillFlexPlace />
-      <Item name="Practice Intelligence" />
-      <Item name="Second Opinion" />
-      <Button primary>
+      <Item
+        href="https://www.hellopearl.com/products/practice-intelligence"
+        target="_blank"
+        name="Practice Intelligence"
+      />
+      <Item href="https://www.hellopearl.com/products/second-opinion" target="_blank" name="Second Opinion" />
+      <Button primary onClick={setScrollForm}>
         <TextButton>Request Demo</TextButton>
       </Button>
     </Layout>
@@ -96,7 +100,7 @@ const Menu = () => {
 Menu.Layout = styled.div<{ changeStyleMenu: boolean }>(
   ({ changeStyleMenu }) => `
   height: ${changeStyleMenu ? '65px' : '100px'};
-  background-image: linear-gradient(101deg, #015177, #0e2025);
+  background-image: radial-gradient(circle farthest-corner at 100% 50%,#216888,#11252f);
   align-items: center;
   display: flex;
   padding: 5px 20px;
@@ -128,19 +132,28 @@ Menu.Logo = styled.img`
     margin-bottom: 0;
   }
 `
-const Item = ({ name }: { name: string }) => {
+const Item = ({
+  name,
+  ...props
+}: {
+  name: string
+} & React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>) => {
   const { Text } = Item
-  return <Text>{name}</Text>
+  return <Text {...props}>{name}</Text>
 }
-Item.Text = styled(Text)`
+Item.Text = styled.a`
   font-weight: 500;
   color: #ffffff;
   cursor: pointer;
   opacity: 0.7;
-  font-size: 18px;
   transition: all 0.2s ease-in-out;
+  text-decoration: none;
   &:hover {
     opacity: 1;
+  }
+  font-size: 16px;
+  @media (max-width: 768px) {
+    font-size: 14px;
   }
 `
 Menu.TextButton = styled(Text)`
@@ -184,7 +197,7 @@ const LandingIntro = () => {
           <ContainerTexts>
             <Title>THE FUTURE OF DENTISTRY</Title>
             <SubTitle>POWERED BY AI</SubTitle>
-            <Button primary>
+            <Button primary onClick={setScrollForm}>
               <TextButton>Request a Demo</TextButton>
             </Button>
           </ContainerTexts>
@@ -296,6 +309,9 @@ LandingIntro.TextFooter = styled(Text)`
   font-size: 17px;
   font-weight: 600;
   color: var(--primary-color-blue);
+  @media (max-width: 768px) {
+    text-align: center;
+  }
 `
 LandingIntro.FooterLogos = styled.div`
   display: flex;
@@ -888,7 +904,9 @@ const FolderGeneralInfo = () => {
           <Title>Curious how AI can benefit your practice?</Title>
           <SubTitle>See our tools in action with a free live demo.</SubTitle>
         </ContainerTexts>
-        <Button secondary>Request a demo</Button>
+        <Button secondary onClick={setScrollForm}>
+          Request a demo
+        </Button>
       </Container>
     </Layout>
   )
@@ -1077,10 +1095,13 @@ const ContainerForm = () => {
     console.log(values)
   }
   const validate = (values: typeof initialValues) => {
+    const validEmailRegex = /\S+@\S+\.\S+/
+
     const errors = {} as { [key: string]: string }
     if (!values.firstName) errors.firstName = 'Required'
     if (!values.lastName) errors.lastName = 'Required'
     if (!values.email) errors.email = 'Required'
+    if (values.email && !validEmailRegex.test(values.email)) errors.email = 'Invalid email address'
     if (!values.phoneNumber) errors.phoneNumber = 'Required'
     if (!values.country) errors.country = 'Required'
     return errors
@@ -1091,7 +1112,7 @@ const ContainerForm = () => {
     validate,
   })
   return (
-    <Layout>
+    <Layout className="form-pearl">
       <FormikProvider value={formik}>
         <Form>
           <Container>
@@ -1530,4 +1551,15 @@ ContactUs.Button = styled(Button)`
 
 const FillFlexPlace = ({ fill = 1 }: { fill?: number }) => {
   return <div style={{ flex: fill }} />
+}
+
+const setScrollForm = () => {
+  const formElement = document.querySelector('.form-pearl')
+  const postionElementTop = formElement?.getBoundingClientRect().top
+  const positionScroll = window.scrollY
+  const top = postionElementTop ? positionScroll + postionElementTop : 0
+  window.scrollTo({
+    top,
+    behavior: 'smooth',
+  })
 }
