@@ -36,6 +36,6 @@ type TState = ReturnType<typeof HomeStore.useState>
 export const selectJustCountryName = createSelector(
   (s: TState) => s.countrys,
   (countrys) => {
-    return countrys?.map((item) => item?.name?.common)
+    return countrys?.map((item) => item?.name?.common).sort((a, b) => (a > b ? 1 : -1))
   }
 )

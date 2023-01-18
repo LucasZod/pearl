@@ -1124,11 +1124,11 @@ const ContainerForm = () => {
               </SubTitle>
             </ContainerTexts>
             <ContainerInputs>
-              <InputForm name="firstName" label="First name" />
-              <InputForm name="lastName" label="Last name" />
-              <InputForm name="email" label="Email" />
-              <InputForm name="phoneNumber" label="Phone number" />
-              <InputForm name="country" label="Country/Region" type="select">
+              <InputForm name="firstName" label="First name" required />
+              <InputForm name="lastName" label="Last name" required />
+              <InputForm name="email" label="Email" required />
+              <InputForm name="phoneNumber" label="Phone number" required />
+              <InputForm name="country" label="Country/Region" type="select" required>
                 <option value="">Select a country</option>
                 {justCountrys?.map((country, index) => (
                   <option key={index} value={country}>
@@ -1223,7 +1223,7 @@ const InputForm = styled(InputField)`
     border: none;
     background: #ffffff;
     box-shadow: 0px 0px 10px rgba(19, 44, 133, 0.7);
-    font-size: 15px;
+    font-size: 14px;
   }
 `
 ContainerForm.AgreeTerms = styled.div``
@@ -1557,7 +1557,7 @@ const setScrollForm = () => {
   const formElement = document.querySelector('.form-pearl')
   const postionElementTop = formElement?.getBoundingClientRect().top
   const positionScroll = window.scrollY
-  const top = postionElementTop ? positionScroll + postionElementTop : 0
+  const top = postionElementTop ? positionScroll + (postionElementTop - 50) : 0
   window.scrollTo({
     top,
     behavior: 'smooth',

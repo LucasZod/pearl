@@ -48,7 +48,9 @@ export const TextFieldInput = React.memo(function textFieldInput({
   return (
     <Label hasError={!!errorMessage} style={style} className={className}>
       <div style={{ display: 'flex', justifyContent: 'space-between', padding: '0 7px' }}>
-        {props.label}
+        <div style={{ display: 'flex', gap: 3 }}>
+          {props.label} {props.required ? <div style={{ color: 'red' }}>*</div> : null}
+        </div>
         <ErrorMessage error={errorMessage} />
       </div>
       {props.type === 'select' ? (
@@ -70,19 +72,19 @@ const Label = styled.label<{ hasError: boolean }>(
   (props) => `
   display: flex;
   flex-direction: column;
-  margin-bottom: 18px;
+  margin-bottom: 15px;
   font-size: 14px;
   input, textarea, select {
     background: #FFFFFF;
     border: 1px solid #828282;
     border-radius: 20px;
     transition: .35s box-shadow;
-    height: 3em;
+    height: 2.7em;
     padding-left: 1em;
     width: 100%;
     outline: none;
     transition: border .3s;
-    margin-top: 8px;
+    margin-top: 5px;
     &:disabled {
       background: #f2f2f2;
     }
