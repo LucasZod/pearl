@@ -1138,11 +1138,11 @@ const ContainerForm = () => {
               </InputForm>
               <InputForm
                 name="softView"
-                label="What software do you use to view radiographs in your practice?"
+                label="What imaging system do you use for radiographs in your practice?"
               />
               <InputForm
                 name="softStore"
-                label="What software do you use to store patient information in your place?"
+                label="What practice management system (PMS) do you use in your practice?"
               />
             </ContainerInputs>
             <AgreeTerms>
