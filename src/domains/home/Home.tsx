@@ -1,3 +1,16 @@
+import {
+  DETECTION_ICON,
+  GAN_BASE_ICON,
+  IMAGE_FDA1,
+  IMAGE_FDA2,
+  IMAGE_PC_PRACTICE_INTELLIGENCE,
+  IMAGE_PC_SECOND_OPINION,
+  MENSURATION_ICON,
+  SEGMENTATION_ICON,
+  VIDEO_INTRO_MP4,
+  VIDEO_INTRO_OGG,
+  VIDEO_INTRO_WEBM,
+} from './HomeConstants'
 import styled from '@emotion/styled'
 import { ReactNode, useCallback, useEffect, useState } from 'react'
 import { Button } from '../components/Button'
@@ -18,22 +31,10 @@ import proveExperienceImage from '../../assets/images/proven-experience-image.pn
 import pearlLogoBlack from '../../assets/images/peral-logo-high.png'
 import secondOpinionHigh from '../../assets/images/second-opinion-high-logo.png'
 import practiceIntelligenceHigh from '../../assets/images/pratice-intelligence-high-logo.png'
-import {
-  DETECTION_ICON,
-  GAN_BASE_ICON,
-  IMAGE_FDA1,
-  IMAGE_FDA2,
-  IMAGE_PC_PRACTICE_INTELLIGENCE,
-  IMAGE_PC_SECOND_OPINION,
-  MENSURATION_ICON,
-  SEGMENTATION_ICON,
-  VIDEO_INTRO_MP4,
-  VIDEO_INTRO_OGG,
-  VIDEO_INTRO_WEBM,
-} from './HomeConstants'
 import { Form, FormikProvider, useFormik } from 'formik'
 import { InputField, TextFieldInput } from '../components/InputText'
 import { HomeStore, selectJustCountryName } from './HomeStore'
+import emailJs from '@emailjs/browser'
 
 export const Home = () => {
   const { Layout } = Home
@@ -1092,11 +1093,19 @@ const ContainerForm = () => {
     softStore: '',
   }
   const onSubmit = (values: typeof initialValues) => {
-    console.log(values)
+    const templateParams = {
+      from_name: values.firstName,
+      message: `Telefone: ${values.phoneNumber} Question1: ${values.softView} Question2: ${values.softStore} Phone: ${values.phoneNumber} Country: ${values.country}`,
+      email: values.email,
+    }
+    emailJs
+      .send('service_7ijfsua', 'template_pdbv7gg', templateParams, 'zD8qW3M6CD1gXOPge')
+      .then(async (response) => {
+        await formik.setValues(initialValues)
+      })
   }
   const validate = (values: typeof initialValues) => {
     const validEmailRegex = /\S+@\S+\.\S+/
-
     const errors = {} as { [key: string]: string }
     if (!values.firstName) errors.firstName = 'Required'
     if (!values.lastName) errors.lastName = 'Required'
@@ -1114,7 +1123,7 @@ const ContainerForm = () => {
   return (
     <Layout className="form-pearl">
       <FormikProvider value={formik}>
-        <Form>
+        <Form action="https://formsubmit.co/lucasmorenozod@gmail.com" method="POST">
           <Container>
             <ContainerTexts>
               <Title>Request a Demo</Title>
