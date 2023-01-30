@@ -17,6 +17,7 @@
     "inputmask": "^5.0.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hot-toast": "^2.3.0",
     "react-router-dom": "^6.6.2",
     "react-simple-reducer": "^1.0.4",
     "reselect": "^4.1.6"

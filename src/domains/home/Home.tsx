@@ -35,6 +35,7 @@ import { Form, FormikProvider, useFormik } from 'formik'
 import { InputField, TextFieldInput } from '../components/InputText'
 import { HomeStore, selectJustCountryName } from './HomeStore'
 import emailJs from '@emailjs/browser'
+import toast from 'react-hot-toast'
 
 export const Home = () => {
   const { Layout } = Home
@@ -1095,13 +1096,22 @@ const ContainerForm = () => {
   const onSubmit = (values: typeof initialValues) => {
     const templateParams = {
       from_name: values.firstName,
-      message: `Telefone: ${values.phoneNumber} Question1: ${values.softView} Question2: ${values.softStore} Phone: ${values.phoneNumber} Country: ${values.country}`,
+      phone: values.phoneNumber,
+      questionOne: values.softView,
+      questionTwo: values.softStore,
+      country: values.country,
       email: values.email,
     }
+    const toastId = toast.loading('Sending email...')
     emailJs
       .send('service_7ijfsua', 'template_pdbv7gg', templateParams, 'zD8qW3M6CD1gXOPge')
       .then(async (response) => {
-        await formik.setValues(initialValues)
+        formik.setValues(initialValues)
+        formik.setTouched({})
+        toast.success('Email sent successfully', { id: toastId })
+      })
+      .catch((error) => {
+        toast.error('Error, please try again later', { id: toastId })
       })
   }
   const validate = (values: typeof initialValues) => {
@@ -1119,6 +1129,7 @@ const ContainerForm = () => {
     initialValues,
     onSubmit,
     validate,
+    enableReinitialize: true,
   })
   return (
     <Layout className="form-pearl">
